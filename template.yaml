@@ -13,17 +13,17 @@
           CidrIp: 0.0.0.0/0
 
   # Service configured for FARGATE
-  ECSService:
+ECSService:
     Type: 'AWS::ECS::Service'
     Properties:
       Cluster: !Ref ECSCluster
       TaskDefinition: !Ref TaskDefinition
-      LaunchType: FARGATE
+      LaunchType: FARGATE # THIS IS THE CRITICAL FIX
       DesiredCount: 1
       NetworkConfiguration:
         AwsvpcConfiguration:
           AssignPublicIp: ENABLED
           Subnets:
-            - subnet-xxxxxx # Use your Public Subnet ID
+            - subnet-xxxxxx # Must be a Public Subnet ID
           SecurityGroups:
             - !Ref ContainerSecurityGroup
