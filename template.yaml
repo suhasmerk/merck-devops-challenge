@@ -18,12 +18,12 @@ ECSService:
     Properties:
       Cluster: !Ref ECSCluster
       TaskDefinition: !Ref TaskDefinition
-      LaunchType: FARGATE # THIS IS THE CRITICAL FIX
+      LaunchType: FARGATE # Mandatory to fix the "No container instance" error
       DesiredCount: 1
       NetworkConfiguration:
         AwsvpcConfiguration:
-          AssignPublicIp: ENABLED
+          AssignPublicIp: ENABLED # Required to pull the image from ECR
           Subnets:
-            - subnet-xxxxxx # Must be a Public Subnet ID
+            - subnet-xxxxxx # Replace with your Default Public Subnet ID
           SecurityGroups:
             - !Ref ContainerSecurityGroup
